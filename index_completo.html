@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processos de Suporte Técnico</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header, nav, section, footer {
+            padding: 20px;
+        }
+        header {
+            background-color: #1f1f1f;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        nav {
+            background-color: #1a1a1a;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        nav a {
+            color: orange;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            max-width: 960px;
+            margin: auto;
+        }
+        .video-section {
+            background-color: #1e1e1e;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h2 {
+            color: orange;
+        }
+        ul {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Processos de Suporte Técnico</h1>
+        <p>Documentação e orientações da equipe Speedfibra</p>
+    </header>
+    <nav>
+        <a href="#abordagem">Abordagem</a>
+        <a href="#clientes">Clientes Bloqueados</a>
+        <a href="#analise">Análise de Conexão</a>
+        <a href="#videos">Tutoriais em Vídeo</a>
+    </nav>
+
+    <section id="abordagem">
+        <h2>Abordagem ao Cliente</h2>
+        <p>Sempre realizar o atendimento de forma cordial e paciente com o cliente, independente do humor do cliente. Seu trabalho é oferecer um atendimento ágil e humanizado, escutar o cliente e focar na resolução do problema utilizando todos os métodos que estejam ao seu alcance e no alcance da sua patente (Suporte técnico).</p>
+        <p>Utilize desse copiloto para guiar seu atendimento e busque conhecimento dentro e fora da empresa para se destacar e facilitar seu trabalho.</p>
+    </section>
+
+    <section id="clientes">
+        <h2>Clientes Bloqueados</h2>
+        <p><strong>Cliente dentro do prazo de redução (15 dias):</strong></p>
+        <ul>
+            <li>O.S (Ordem de serviço) Fibra OFF obrigatória por parte da empresa.</li>
+            <li>Orientação para acesso ao app para desbloqueio. Em casos extremos, desbloqueio interno com aviso de validade.</li>
+            <li>Suporte de lentidão/quedas não é possível com conexão reduzida.</li>
+        </ul>
+        <p><strong>Cliente com bloqueio total (30 dias):</strong></p>
+        <ul>
+            <li>Orientar sobre pagamento e desbloqueio via app.</li>
+            <li>Sem serviços técnicos até pagamento ser comprovado.</li>
+        </ul>
+    </section>
+
+    <section id="analise">
+        <h2>Análise de Problemas de Conexão</h2>
+        <p><strong>Tipos de conexão:</strong></p>
+        <ul>
+            <li><strong>Rádio:</strong> Mikrotik, Tplink. Baixa estabilidade, zonas rurais.</li>
+            <li><strong>GPON:</strong> Huawei EchoLife. Alta velocidade e estabilidade.</li>
+            <li><strong>EPON:</strong> ONU + Tplink. Operadoras específicas.</li>
+        </ul>
+        <p><strong>Identificação de problemas:</strong></p>
+        <ul>
+            <li>LOS vermelho: Fibra OFF → Validar CTO → Abrir O.S ou encaminhar ao NOC.</li>
+            <li>PON piscando: ONU aguardando provisionamento → Verificar SN da ONU.</li>
+            <li>ONU Online sem navegação: Verificar PPPoE → Rodar script no OLT CLOUD.</li>
+            <li>Sinal atenuado: Comparar com demais clientes na CTO ou rede.</li>
+        </ul>
+        <p><strong>Lentidão:</strong> Testar velocidade, conversar com o cliente, verificar configurações da ONU, encaminhar O.S se necessário.</p>
+        <p><strong>Quedas:</strong> Avaliar causa: LOS, energia, PPPoE ou dispositivo do cliente.</p>
+        <p><strong>ONU Bridge:</strong> Desabilitar Wi-Fi, DHCP e criar WAN em modo bridge com VLAN correta.</p>
+    </section>
+
+    <section id="videos" class="video-section">
+        <h2>Tutoriais em Vídeo</h2>
+        <p>Em breve você poderá assistir a tutoriais em vídeo sobre os procedimentos descritos neste site.</p>
+    </section>
+
+    <footer>
+        <p style="text-align:center;">Criado por Victor Pereira Silva - Speedfibra</p>
+    </footer>
+</body>
+</html>
