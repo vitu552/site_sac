@@ -1,188 +1,102 @@
+from docx import Document
+from bs4 import BeautifulSoup
+import os
+
+# Carregando o conteúdo do PDF como texto (resumo do conteúdo, pois imagens não estão embutidas)
+pdf_text = """
+[RESUMO OMITIDO: O conteúdo do PDF será convertido em HTML manualmente na próxima etapa, com estruturação baseada no conteúdo lido.]
+"""
+
+# Estrutura HTML básica com espaço para os vídeos
+html_template = """
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Orientações de Suporte Técnico</title>
-<style>
-  body {
-    background-color: #121212;
-    color: #ffa500;
-    font-family: Arial, sans-serif;
-    margin: 20px auto;
-    max-width: 900px;
-    line-height: 1.6;
-  }
-  h1, h2, h3 {
-    color: #ff8c00;
-  }
-  h1 {
-    border-bottom: 2px solid #ff8c00;
-    padding-bottom: 8px;
-  }
-  ul, ol {
-    margin-left: 20px;
-    margin-bottom: 20px;
-  }
-  strong {
-    color: #ffb84d;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processos de Suporte</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header, nav, section, footer {
+            padding: 20px;
+        }
+        header {
+            background-color: #1f1f1f;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        nav {
+            background-color: #1a1a1a;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        nav a {
+            color: orange;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            max-width: 960px;
+            margin: auto;
+        }
+        .video-section {
+            background-color: #1e1e1e;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-
-<h1>Orientações de Suporte Técnico</h1>
-
-<h2>ABORDAGEM AO CLIENTE</h2>
-<p><strong>Sempre realizar o atendimento de forma cordial e paciente com o cliente, independente do humor do cliente.</strong> Seu trabalho é oferecer um atendimento ágil e humanizado, escutar o cliente e focar na resolução do problema utilizando todos os métodos que esteja ao seu alcance e no alcance da sua patente (Suporte técnico).</p>
-<p>Utilize desse copiloto para guiar seu atendimento e busque conhecimento dentro e fora da empresa para se destacar e facilitar seu trabalho.</p>
-
-<h2>CLIENTES BLOQUEADOS PARCIALMENTE (REDUZIDOS) / BLOQUEADOS TOTALMENTE</h2>
-
-<h3>Cliente dentro do prazo de redução (15 DIAS):</h3>
-<ul>
-  <li><strong>Reparos possíveis:</strong></li>
-  <ul>
-    <li>O.S (Ordem de serviço) Fibra OFF obrigatória por parte da empresa.</li>
-    <li>Orientação para acesso do aplicativo para desbloqueio e, em casos mais delicados (Insatisfação extrema, cliente irredutível e cancelamento), realizamos o desbloqueio interno passando as orientações sobre o tempo em que o desbloqueio ficará disponível e quando será bloqueado novamente.</li>
-    <li>Suporte referente a lentidão/quedas e validações que englobam o problema de lentidão/quedas não conseguimos fazer com a conexão reduzida.</li>
-  </ul>
-</ul>
-
-<h3>Cliente com bloqueio total (30 DIAS):</h3>
-<ul>
-  <li>Orientar a realizar o pagamento, se o pagamento já tiver sido feito ou não.</li>
-  <li>Orientar o cliente ao desbloqueio pelo aplicativo se solicitado, sempre orientando sobre o prazo em que o desbloqueio fica ativo e quando retorna o bloqueio novamente se não efetuado o pagamento.</li>
-  <li>Com a conexão bloqueada totalmente, não conseguimos realizar serviços como Fibra OFF, Mudança de endereço/local, reparos em geral, somente mediante ao pagamento com o envio do comprovante.</li>
-  <li>Se houver dúvidas sobre a veracidade do comprovante, consultar a supervisão/gestão.</li>
-</ul>
-
-<h2>ANÁLISE DE PROBLEMA NA CONEXÃO DO CLIENTE</h2>
-<p><strong>Levar em consideração sempre a tecnologia de conexão do cliente (Rádio, fibra GPON ou fibra EPON):</strong></p>
-
-<h3>Rádio</h3>
-<ul>
-  <li><strong>Método de transmissão:</strong> Transmissão via ondas de rádio (sem fio)</li>
-  <li><strong>Velocidade:</strong> Média a baixa</li>
-  <li><strong>Estabilidade:</strong> Atingida por interferências e clima</li>
-  <li><strong>Equipamentos usados:</strong> Cliente (CPE): Mikrotik (Antena), roteadores TP-Link ou outros modelos</li>
-  <li><strong>Uso comum:</strong> Zonas rurais, áreas sem fibra disponível</li>
-</ul>
-
-<h3>Fibra GPON (Gigabit Passive Optical Network)</h3>
-<ul>
-  <li><strong>Método de transmissão:</strong> Fibra óptica</li>
-  <li><strong>Velocidade:</strong> Até 2,5 Gbps download / 1,25 Gbps upload</li>
-  <li><strong>Estabilidade:</strong> Alta, longo alcance (20 km)</li>
-  <li><strong>Equipamentos usados:</strong> ONU/ONT (Cliente): Huawei EchoLife</li>
-  <li><strong>Uso comum:</strong> Provedores de internet (principal tecnologia no Brasil)</li>
-</ul>
-
-<h3>Fibra EPON (Ethernet Passive Optical Network)</h3>
-<ul>
-  <li><strong>Método de transmissão:</strong> Fibra óptica</li>
-  <li><strong>Velocidade:</strong> Até 1,25 Gbps simétrico (upload/download)</li>
-  <li><strong>Estabilidade:</strong> Alta</li>
-  <li><strong>Equipamentos usados:</strong> ONU EPON + roteador TP-Link</li>
-  <li><strong>Uso comum:</strong> Operadoras específicas</li>
-</ul>
-
-<h2>IDENTIFICAÇÃO E RESOLUÇÃO DE PROBLEMAS</h2>
-
-<h3>Fibra OFF</h3>
-<ol>
-  <li>Perguntar ao cliente se há alguma luz vermelha no equipamento (<strong>LUZ VERMELHA - LOS indica problema na fibra</strong>).</li>
-  <li>Se luz vermelha confirmada, validar a CTO do cliente. Se todos da CTO estiverem OFF, problema é na infraestrutura e deve ser encaminhado ao NOC.</li>
-  <li>Se CTO não estiver OFF, encaminhar O.S pontual para reparo na residência.</li>
-</ol>
-
-<h3>Luz PON Piscando</h3>
-<p>Indica que a ONU está disponível para ser adicionada na rede. Confirmar a SN (número de série) com o cliente para adicionar na rede via sistema OLT CLOUD. Caso não consiga, agendar O.S.</p>
-
-<h3>ONU Online sem Navegação (Fibra Online)</h3>
-<p>Verificar PPPoE conectado no ERP (Voalle). Caso não conectado, rodar script na ONU via OLT CLOUD. Se não resolver, consultar analista ou supervisão.</p>
-
-<h3>ONU com Sinal Atenuado</h3>
-<p>Identificar se é problema pontual do cliente ou da CTO/rede inteira e encaminhar O.S pontual ou NOC conforme o caso.</p>
-
-<h2>LENTIDÃO</h2>
-<p>Solicitar teste de velocidade e verificar parâmetros de Wi-Fi, LAN e interferências. Dialogar com cliente para entender detalhes da lentidão. Encaminhar para analista ou supervisor se necessário e, por fim, O.S pontual para avaliação técnica.</p>
-
-<h2>QUEDAS</h2>
-<p>Identificar o tipo de queda e agir conforme abaixo:</p>
-<ul>
-  <li><strong>Queda por LOS:</strong> Avaliar sinal óptico, CTO, rede e encaminhar O.S pontual.</li>
-  <li><strong>Queda por energia:</strong> Testar troca de tomada, se persistir, encaminhar O.S para avaliação da fonte da ONU.</li>
-  <li><strong>Queda de PPPoE:</strong> Trocar PPPoE no ERP e rodar script na ONU; consultar analista/supervisor se necessário.</li>
-  <li><strong>Queda por aparelho do cliente:</strong> Orientar reiniciar aparelho, esquecer/reconectar Wi-Fi e alterar SSID/senha; consultar analista/supervisor se persistir.</li>
-</ul>
-
-<h2>CONFIGURAÇÃO DE ONU BRIDGE</h2>
-<ul>
-  <li>Desabilitar o Wi-Fi</li>
-  <li>Desativar o DHCP</li>
-  <li>Criar nova WAN em bridge com VLAN ID conforme sistema OLT CLOUD</li>
-</ul>
-
-<h2>MUDANÇA DE ENDEREÇO / LOCAL</h2>
-<ul>
-  <li>Verificar viabilidade de rede no novo endereço via CODE MAPS</li>
-  <li>Cliente deve estar em dia e ser titular do contrato</li>
-  <li>Alterar endereço no sistema antes de encaminhar O.S</li>
-  <li>Mudança de local é dentro da mesma residência</li>
-</ul>
-
-<h2>PROCESSO PARA REPASSE DE FIBRA</h2>
-<ul>
-  <li>Solicitação por preferência do cliente: serviço pago</li>
-  <li>Solicitação por problema (conflito): consultar supervisão</li>
-  <li>Após manobras de rede pela infraestrutura: O.S sem tarifação</li>
-</ul>
-
-<h2>PROCESSO PARA O.S DE CABO DE REDE</h2>
-<ul>
-  <li>Entrega + instalação: R$49,90 + R$2,00 por metro (1º metro grátis)</li>
-  <li>Apenas entrega: R$29,90 + R$2,00 por metro</li>
-  <li>Pagamento via mensalidade, pix ou avaliação da supervisão</li>
-</ul>
-
-<h2>PROCESSO DE SUSPENSÃO</h2>
-<p>Suspensão somente mediante solicitação do cliente, prazo máximo 120 dias, podendo solicitar nova suspensão somente após 365 dias.</p>
-
-<h2>PROCESSO DE REDIRECIONAMENTO DE PORTAS</h2>
-<p>Dados necessários do cliente: IP, portas e protocolo (TCP/UDP).</p>
-<ul>
-  <li><strong>Interno:</strong> Redireciona porta para IP interno na rede do cliente.</li>
-  <li><strong>Externo:</strong> Permite acesso de fora para dentro da rede do cliente.</li>
-  <li><strong>CGNAT:</strong> Impede redirecionamento externo, só funciona com IP público fixo.</li>
-</ul>
-
-<h2>SUPORTE A WATCH (Streaming)</h2>
-<p>Verificar compatibilidade do dispositivo e atualizações do app Watch.</p>
-
-<h3>Smart TVs Compatíveis:</h3>
-<ul>
-  <li>Android 9.0 ou posterior</li>
-  <li>TCL, Philco, AOC</li>
-  <li>Samsung Tizen 2019 ou superior</li>
-  <li>LG WebOS 2018 ou superior</li>
-</ul>
-
-<h3>Celulares e Tablets:</h3>
-<ul>
-  <li>Android 8.0</li>
-  <li>iOS 9 ou superior</li>
-</ul>
-
-<h3>STB/Portáteis e Fire Stick TV:</h3>
-<ul>
-  <li>Elsys</li>
-  <li>Roku Express</li>
-  <li>ZTE ZXV10</li>
-  <li>Android TV 9.0 ou posterior</li>
-</ul>
-
-<p>Equipamentos não homologados estão propensos a falhas.</p>
-
+    <header>
+        <h1>Processos de Suporte Técnico</h1>
+        <p>Documentação e orientações da equipe Speedfibra</p>
+    </header>
+    <nav>
+        <a href="#abordagem">Abordagem</a>
+        <a href="#clientes">Clientes Bloqueados</a>
+        <a href="#analise">Análise de Conexão</a>
+        <a href="#videos">Tutoriais em Vídeo</a>
+    </nav>
+    <section id="abordagem">
+        <h2>Abordagem ao Cliente</h2>
+        <p>Sempre realizar o atendimento de forma cordial e paciente com o cliente, independente do humor do cliente. Seu trabalho é oferecer um atendimento ágil e humanizado, escutar o cliente e focar na resolução do problema utilizando todos os métodos que estejam ao seu alcance e no alcance da sua patente (Suporte técnico).</p>
+        <p>Utilize desse copiloto para guiar seu atendimento e busque conhecimento dentro e fora da empresa para se destacar e facilitar seu trabalho.</p>
+    </section>
+    <section id="clientes">
+        <h2>Clientes Bloqueados</h2>
+        <p>Conteúdo completo desta seção será inserido aqui conforme a estrutura do PDF...</p>
+    </section>
+    <section id="analise">
+        <h2>Análise de Problemas de Conexão</h2>
+        <p>Conteúdo completo desta seção será inserido aqui conforme a estrutura do PDF...</p>
+    </section>
+    <section id="videos" class="video-section">
+        <h2>Tutoriais em Vídeo</h2>
+        <p>Em breve você poderá assistir a tutoriais em vídeo sobre os procedimentos descritos neste site.</p>
+    </section>
+    <footer>
+        <p style="text-align:center;">Criado por Victor Pereira Silva - Speedfibra</p>
+    </footer>
 </body>
 </html>
+"""
+
+# Salvar o arquivo HTML
+output_path = "/mnt/data/site_processos_suporte.html"
+with open(output_path, "w", encoding="utf-8") as f:
+    f.write(html_template)
+
+output_path
