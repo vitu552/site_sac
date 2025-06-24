@@ -1,120 +1,160 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Processos de Suporte Técnico</title>
-    <style>
-        body {
-            background-color: #121212;
-            color: #f0f0f0;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        header, nav, section, footer {
-            padding: 20px;
-        }
-        header {
-            background-color: #1f1f1f;
-            text-align: center;
-            padding: 30px 20px;
-        }
-        nav {
-            background-color: #1a1a1a;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-        nav a {
-            color: orange;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        section {
-            max-width: 960px;
-            margin: auto;
-        }
-        .video-section {
-            background-color: #1e1e1e;
-            margin-top: 30px;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        h2 {
-            color: orange;
-        }
-        ul {
-            margin-left: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Processos de Suporte</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1, h2, h3 {
+      color: #ff6600;
+    }
+    h1 {
+      font-size: 2.2em;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    section {
+      margin-bottom: 2em;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    a {
+      color: #4da6ff;
+    }
+    .box {
+      background: #1e1e1e;
+      padding: 15px;
+      border-left: 5px solid #ff6600;
+      margin: 10px 0;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Processos de Suporte Técnico</h1>
-        <p>Documentação e orientações da equipe Speedfibra</p>
-    </header>
-    <nav>
-        <a href="#abordagem">Abordagem</a>
-        <a href="#clientes">Clientes Bloqueados</a>
-        <a href="#analise">Análise de Conexão</a>
-        <a href="#videos">Tutoriais em Vídeo</a>
-    </nav>
+  <h1>Processos de Suporte</h1>
 
-    <section id="abordagem">
-        <h2>Abordagem ao Cliente</h2>
-        <p>Sempre realizar o atendimento de forma cordial e paciente com o cliente, independente do humor do cliente. Seu trabalho é oferecer um atendimento ágil e humanizado, escutar o cliente e focar na resolução do problema utilizando todos os métodos que estejam ao seu alcance e no alcance da sua patente (Suporte técnico).</p>
-        <p>Utilize desse copiloto para guiar seu atendimento e busque conhecimento dentro e fora da empresa para se destacar e facilitar seu trabalho.</p>
-    </section>
+  <section>
+    <h2>Abordagem ao Cliente</h2>
+    <p>Sempre realizar o atendimento de forma cordial e paciente com o cliente, independente do humor do cliente, seu trabalho é oferecer um atendimento ágil e humanizado, escutar o cliente e focar na resolução do problema utilizando todos os métodos que estejam ao seu alcance e no alcance da sua patente (Suporte técnico).</p>
+    <p>Utilize desse copiloto para guiar seu atendimento e busque conhecimento dentro e fora da empresa para se destacar e facilitar seu trabalho.</p>
+  </section>
 
-    <section id="clientes">
-        <h2>Clientes Bloqueados</h2>
-        <p><strong>Cliente dentro do prazo de redução (15 dias):</strong></p>
-        <ul>
-            <li>O.S (Ordem de serviço) Fibra OFF obrigatória por parte da empresa.</li>
-            <li>Orientação para acesso ao app para desbloqueio. Em casos extremos, desbloqueio interno com aviso de validade.</li>
-            <li>Suporte de lentidão/quedas não é possível com conexão reduzida.</li>
-        </ul>
-        <p><strong>Cliente com bloqueio total (30 dias):</strong></p>
-        <ul>
-            <li>Orientar sobre pagamento e desbloqueio via app.</li>
-            <li>Sem serviços técnicos até pagamento ser comprovado.</li>
-        </ul>
-    </section>
+  <section>
+    <h2>Clientes Bloqueados Parcialmente / Totalmente</h2>
+    <div class="box">
+      <strong>Cliente dentro do prazo de redução (15 dias):</strong>
+      <ul>
+        <li>Fibra OFF → O.S obrigatória</li>
+        <li>Desbloqueio via app ou interno em caso de cancelamento</li>
+        <li>Lentidão/quedas não diagnosticadas com conexão reduzida</li>
+      </ul>
+    </div>
+    <div class="box">
+      <strong>Cliente com bloqueio total (30 dias):</strong>
+      <ul>
+        <li>Pagamento obrigatório</li>
+        <li>Desbloqueio via app, prazo informado</li>
+        <li>Sem serviços técnicos com conexão bloqueada</li>
+      </ul>
+    </div>
+  </section>
 
-    <section id="analise">
-        <h2>Análise de Problemas de Conexão</h2>
-        <p><strong>Tipos de conexão:</strong></p>
-        <ul>
-            <li><strong>Rádio:</strong> Mikrotik, Tplink. Baixa estabilidade, zonas rurais.</li>
-            <li><strong>GPON:</strong> Huawei EchoLife. Alta velocidade e estabilidade.</li>
-            <li><strong>EPON:</strong> ONU + Tplink. Operadoras específicas.</li>
-        </ul>
-        <p><strong>Identificação de problemas:</strong></p>
-        <ul>
-            <li>LOS vermelho: Fibra OFF → Validar CTO → Abrir O.S ou encaminhar ao NOC.</li>
-            <li>PON piscando: ONU aguardando provisionamento → Verificar SN da ONU.</li>
-            <li>ONU Online sem navegação: Verificar PPPoE → Rodar script no OLT CLOUD.</li>
-            <li>Sinal atenuado: Comparar com demais clientes na CTO ou rede.</li>
-        </ul>
-        <p><strong>Lentidão:</strong> Testar velocidade, conversar com o cliente, verificar configurações da ONU, encaminhar O.S se necessário.</p>
-        <p><strong>Quedas:</strong> Avaliar causa: LOS, energia, PPPoE ou dispositivo do cliente.</p>
-        <p><strong>ONU Bridge:</strong> Desabilitar Wi-Fi, DHCP e criar WAN em modo bridge com VLAN correta.</p>
-    </section>
+  <section>
+    <h2>Análise de Problema na Conexão</h2>
+    <p><strong>Levar em consideração a tecnologia do cliente:</strong></p>
+    <ul>
+      <li><strong>Rádio:</strong> Média a baixa velocidade, antena Mikrotik</li>
+      <li><strong>GPON:</strong> Até 2,5 Gbps, ONU Huawei EchoLife</li>
+      <li><strong>EPON:</strong> Até 1,25 Gbps simétrico, ONU EPON</li>
+    </ul>
+  </section>
 
-    <section id="videos" class="video-section">
-        <h2>Tutoriais em Vídeo</h2>
-        <p>Em breve você poderá assistir a tutoriais em vídeo sobre os procedimentos descritos neste site.</p>
-    </section>
+  <section>
+    <h2>Identificação de Problemas Comuns</h2>
+    <ul>
+      <li><strong>Luz vermelha LOS:</strong> Fibra OFF → verificar CTO</li>
+      <li><strong>Luz PON piscando:</strong> ONU disponível → adicionar no OLT CLOUD</li>
+      <li><strong>ONU online sem navegação:</strong> Verificar PPPoE, rodar script</li>
+      <li><strong>Sinal atenuado:</strong> Verificar CTO, média de sinal</li>
+    </ul>
+  </section>
 
-    <footer>
-        <p style="text-align:center;">Criado por Victor Pereira Silva - Speedfibra</p>
-    </footer>
+  <section>
+    <h2>Tratativas de Lentidão</h2>
+    <p>Solicitar teste de velocidade (Wi-Fi e cabo). Dialogar com o cliente para entender contexto da lentidão. Verificações técnicas na ONU: sinal, Wi-Fi, LAN, interferências etc.</p>
+  </section>
+
+  <section>
+    <h2>Quedas de Conexão</h2>
+    <ul>
+      <li>Queda por LOS → verificação da fibra</li>
+      <li>Queda por energia → testar tomada</li>
+      <li>Queda PPPoE → trocar no ERP e rodar script</li>
+      <li>Queda por aparelho → orientar cliente e revisar rede Wi-Fi</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Configuração ONU Bridge</h2>
+    <ul>
+      <li>Desabilitar Wi-Fi</li>
+      <li>Desativar DHCP</li>
+      <li>Criar nova WAN em bridge com VLAN do cliente</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Mudança de Endereço / Local</h2>
+    <p>Verificar viabilidade no CODE MAPS. Cliente precisa estar em dia. Atualizar dados no sistema antes da O.S.</p>
+  </section>
+
+  <section>
+    <h2>Repasse de Fibra</h2>
+    <ul>
+      <li>Por preferência do cliente → serviço pago</li>
+      <li>Conflitos com vizinhos → consultar supervisão</li>
+      <li>Manobra de rede → serviço gratuito</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>O.S de Cabo de Rede</h2>
+    <ul>
+      <li>Entrega + instalação: R$49,90 + R$2,00/m</li>
+      <li>Apenas entrega: R$29,90 + R$2,00/m</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Suspensão de Contrato</h2>
+    <p>Somente se solicitado pelo cliente. Máximo 120 dias. Nova solicitação apenas após 1 ano.</p>
+  </section>
+
+  <section>
+    <h2>Redirecionamento de Portas</h2>
+    <ul>
+      <li>Dados necessários: IP, portas, protocolo</li>
+      <li>Interno: tráfego redirecionado dentro da rede</li>
+      <li>Externo: exige IP público fixo (não funciona com CGNAT)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Suporte ao Watch (Streaming)</h2>
+    <p>Verificar sistema operacional e compatibilidade. Equipamentos homologados: Android 9+, Samsung 2019+, LG 2018+, Elsys, Roku, ZTE, Android TV.</p>
+  </section>
+
+  <footer style="margin-top: 4em; text-align: center; font-size: 0.9em; color: #888;">
+    Criado por Victor Pereira Silva
+  </footer>
 </body>
 </html>
